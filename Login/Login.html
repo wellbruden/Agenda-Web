@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Efeito de Onda</title>
+
+<style>
+#theDiv {
+ position : relative;  z-index: 8; visibility : visible; align : center; color:#555555;
+ }
+ body
+	{
+		background-color: azure;
+	}
+	form
+	{
+		border: 4px double black;
+		width: 400px;
+		height: 300px;
+		background-color: white;
+		position: absolute;
+		top: 30%;
+		left: 35%;
+	}
+	span
+	{
+		position: absolute;
+		top: 30%;
+		left: 35%;
+	}
+	b
+	{
+		font-size: 25px;S
+	}
+	#theDiv
+	{
+		position: absolute;
+		top: 32%;
+		left: 45%;
+	}
+</style>
+
+
+<script language="JavaScript">
+//script encontrado em a1javascripts.com
+function nextSize(i,incMethod,textLength)
+{
+if (incMethod == 1) { return (22*Math.abs(Math.sin(i/(textLength/3.14))) );
+}
+if (incMethod == 2) { return (255*Math.abs(Math.cos(i/(textLength/3.14))));
+}
+return(0)
+}
+function sizeCycle(text,method,dis)
+{
+var output = "";
+for (i = 0; i < text.length; i++) {
+size = parseInt(nextSize(i +dis,method,text.length));
+output += "<font style='font-size: "+ size +"pt'>" +text.substring(i,i+1)+ "</font>";
+}
+if (document.all)
+theDiv.innerHTML = output;
+else if (document.getElementById){
+rng = document.createRange();
+el = document.getElementById('theDiv');
+rng.setStartBefore(el);
+htmlFrag = rng.createContextualFragment(output);
+while (el.hasChildNodes()) el.removeChild(el.lastChild);
+el.appendChild(htmlFrag);}
+else if (document.layers){
+
+document.theDiv.document.write("<font face='Verdana'point-size=11>"+output+"</font>");
+document.theDiv.document.close();}
+
+
+}
+//coloque seu texto aqui
+
+function doWave(n) {
+var theText = 'Seja Bem-Vindo!!!';
+
+sizeCycle(theText,1,n);
+if (n > theText.length) {
+n=0
+}
+setTimeout("doWave(" + (n+1) + ")", 80);
+}
+
+</script>
+
+
+<body onload="doWave(0)">
+
+
+<div ID="theDiv" align="center"></div>
+</head>
+
+<body>
+<center>
+	<form method="get" action="paginainicial.jsp">
+	<span>
+		<b>Agenda Online</b>
+		<br>
+		Login:<input type="text" size="10" name="nome" />
+		<br>
+		Senha:<input type ="password" size="10" name="senha" maxlength="8" />
+		<br>
+		<input type="submit" value="Enviar">
+        <input type="reset" value="Limpar">
+	</span>
+	</form>
+	</center>
+</body>
+</html>
